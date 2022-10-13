@@ -685,12 +685,21 @@ void ShowPageHeader()
 }
 void ShowCurrentDate()
 {
+  String Hours = String(DateTime.getParts().getHours());
+  String Minutes = String(DateTime.getParts().getMinutes());
+  String display_str = Hours + " : " + Minutes;
+
   String dateInCenter = String(DateTime.getParts().getMonthDay());
   int m = DateTime.getParts().getMonth();
 
   u8g2Fonts.setFont(u8g2_mfxinran_92_number);
   int16_t dateWidth = u8g2Fonts.getUTF8Width(dateInCenter.c_str());
   u8g2Fonts.drawUTF8((DISPLAY_WIDTH - dateWidth) / 2, 300, dateInCenter.c_str());
+
+  // int16_t hoursWidth = u8g2Fonts.getUTF8Width(Hours.c_str());
+  // int16_t minutesWidth = u8g2Fonts.getUTF8Width(Minutes.c_str());
+  // u8g2Fonts.drawUTF8((DISPLAY_WIDTH) / 2 - hoursWidth - 10, 300, Hours.c_str());
+  // u8g2Fonts.drawUTF8((DISPLAY_WIDTH) / 2 + 10, 300, Minutes.c_str());
 
   u8g2Fonts.setFont(u8g2_mfyuehei_14_gb2312);
   int16_t monthWidth = u8g2Fonts.getUTF8Width(MONTH_EN[m]);
@@ -716,7 +725,7 @@ void ShowWeatherFoot()
   foot.concat("°C");
 
   u8g2Fonts.setFont(u8g2_mfyuehei_14_gb2312);
-  u8g2Fonts.drawUTF8(88, DISPLAY_HEIGHT - 24, foot.c_str());
+  u8g2Fonts.drawUTF8(88, DISPLAY_HEIGHT - 50, foot.c_str());
 }
 
 void ShowWeatherContent()
@@ -830,7 +839,7 @@ void ShowPage(PageContent pageContent)
   switch (pageContent)
   {
   case PageContent::CALENDAR:
-    drawBitmapFromSpiffs_Buffered(iconFileSmall.c_str(), 48, DISPLAY_HEIGHT - 48, false, true, false);
+    drawBitmapFromSpiffs_Buffered(iconFileSmall.c_str(), 48, DISPLAY_HEIGHT - 48 - 26, false, true, false);
     break;
   case PageContent::WEATHER:
     drawBitmapFromSpiffs_Buffered(iconFileSmall.c_str(), 48, DISPLAY_HEIGHT - 48, false, true, false);

@@ -2,6 +2,23 @@
 
 const char *LOCALIZATION[] = {"en","de","es","pt-BR","fr","ja","zh-CN","ru"};
 
+// {
+// 	"status": "success",
+// 	"country": "中国",
+// 	"countryCode": "CN",
+// 	"region": "TJ",
+// 	"regionName": "天津市",
+// 	"city": "天津",
+// 	"zip": "",
+// 	"lat": 39.1488,
+// 	"lon": 117.1762,
+// 	"timezone": "Asia/Shanghai",
+// 	"isp": "CHINA UNICOM China169 Backbone",
+// 	"org": "Cnnic",
+// 	"as": "AS4837 CHINA UNICOM China169 Backbone",
+// 	"query": "211.94.195.50"
+// }
+
 IPAPIResponse GetIPInfomation(String ip, Localization localization)
 {
     WiFiClient client;
@@ -70,5 +87,10 @@ IPAPIResponse GetIPInfomation(String ip, Localization localization)
     
     httpClient.end();
     client.stop();
+
+    response.query = "211.94.195.50";
+    response.status = "success";
+    response.regionName = "北京市";
+    response.city = "北京";
     return response;
 }
